@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Enquiry Form</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --accent-color: #4a5568;
+            --background: #f7fafc;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--primary-color);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 500px;
+            padding: 25px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            color: var(--accent-color);
+            line-height: 1.4;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="date"],
+        .input-group input[type="tel"],
+        .input-group input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #2d3748;
+            background-color: #fff;
+            -webkit-appearance: none;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .service-row {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .service-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qty-input {
+            width: 70px;
+            padding: 6px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .options-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .option-btn {
+            flex: 1;
+            position: relative;
+        }
+
+        .option-btn input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .option-btn label {
+            display: block;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #cbd5e0;
+            padding: 10px 5px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn input[type="radio"]:checked + label {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 25px 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        .submit-btn:active {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="header">
+        <h1>Enquiry Form</h1>
+        <p>Erin Elizabeth Artistry<br>&amp;<br>Stephanie McGow Hair Artistry</p>
+    </div>
+
+    <form id="enquiryForm" onsubmit="handleSubmit(event)">
+        
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="wedding-date">Wedding Date:</label>
+            <input type="date" id="wedding-date" required>
+        </div>
+
+        <div class="input-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" required>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="service-row">
+            <div class="service-title">
+                <span>Number of Bridesmaids:</span>
+                <input type="number" min="0" class="qty-input" id="bm_qty" placeholder="0">
+            </div>
+            <div class="options-group">
+                <div class="option-btn">
+                    <input type="radio" id="bm_makeup" name="bm_service" value="Makeup">
+                    <label for="bm_makeup">Makeup</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="bm_hair" name="bm_service" value="Hair">
+                    <label for="bm_hair">Hair</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="bm_both" name="bm_service" value="Both">
+                    <label for="bm_both">Both</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-title">
+                <span>Number of Mothers:</span>
+                <input type="number" min="0" class="qty-input" id="mom_qty" placeholder="0">
+            </div>
+            <div class="options-group">
+                <div class="option-btn">
+                    <input type="radio" id="mom_makeup" name="mom_service" value="Makeup">
+                    <label for="mom_makeup">Makeup</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="mom_hair" name="mom_service" value="Hair">
+                    <label for="mom_hair">Hair</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="mom_both" name="mom_service" value="Both">
+                    <label for="mom_both">Both</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-title">
+                <span>Number of Guests:</span>
+                <input type="number" min="0" class="qty-input" id="guest_qty" placeholder="0">
+            </div>
+            <div class="options-group">
+                <div class="option-btn">
+                    <input type="radio" id="guest_makeup" name="guest_service" value="Makeup">
+                    <label for="guest_makeup">Makeup</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="guest_hair" name="guest_service" value="Hair">
+                    <label for="guest_hair">Hair</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="guest_both" name="guest_service" value="Both">
+                    <label for="guest_both">Both</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-title">
+                <span>Number of Junior/Flower girls:</span>
+                <input type="number" min="0" class="qty-input" id="jr_qty" placeholder="0">
+            </div>
+            <div class="options-group">
+                <div class="option-btn">
+                    <input type="radio" id="jr_makeup" name="jr_service" value="Makeup">
+                    <label for="jr_makeup">Makeup</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="jr_hair" name="jr_service" value="Hair">
+                    <label for="jr_hair">Hair</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="jr_both" name="jr_service" value="Both">
+                    <label for="jr_both">Both</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="input-group">
+            <label>Are you wanting a trial?</label>
+            <div class="options-group" style="margin-top: 5px;">
+                <div class="option-btn">
+                    <input type="radio" id="trial_yes" name="trial_intent" value="Yes">
+                    <label for="trial_yes">Yes</label>
+                </div>
+                <div class="option-btn">
+                    <input type="radio" id="trial_no" name="trial_intent" value="No">
+                    <label for="trial_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="input-group">
+            <label for="phone">Contact Number:</label>
+            <input type="tel" id="phone" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Email Enquiry</button>
+    </form>
+</div>
+
+<script>
+    // --- LIVE PRODUCTION EMAILS ---
+    const ERIN_EMAIL = "erinelizabethartistry@outlook.com";
+    const STEPH_EMAIL = "Stephaniemcgow@gmail.com";
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        // Get Core Field Values
+        const name = document.getElementById('name').value;
+        const date = document.getElementById('wedding-date').value;
+        const location = document.getElementById('location').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+
+        // Helper to grab values from the groups
+        const getSelectedRadioValue = (name) => {
+            const el = document.querySelector(`input[name="${name}"]:checked`);
+            return el ? el.value : 'None Selected';
+        };
+
+        const bmQty = document.getElementById('bm_qty').value || '0';
+        const bmService = getSelectedRadioValue('bm_service');
+
+        const momQty = document.getElementById('mom_qty').value || '0';
+        const momService = getSelectedRadioValue('mom_service');
+
+        const guestQty = document.getElementById('guest_qty').value || '0';
+        const guestService = getSelectedRadioValue('guest_service');
+
+        const jrQty = document.getElementById('jr_qty').value || '0';
+        const jrService = getSelectedRadioValue('jr_service');
+
+        const trialIntent = getSelectedRadioValue('trial_intent');
+
+        // Logic to determine recipients based on service selections
+        let recipients = [];
+        const allSelectedServices = [bmService, momService, guestService, jrService];
+
+        if (allSelectedServices.includes('Makeup') || allSelectedServices.includes('Both')) {
+            recipients.push(ERIN_EMAIL);
+        }
+        if (allSelectedServices.includes('Hair') || allSelectedServices.includes('Both')) {
+            recipients.push(STEPH_EMAIL);
+        }
+
+        // Default backup if no rows are checked yet
+        if (recipients.length === 0) {
+            recipients.push(ERIN_EMAIL, STEPH_EMAIL);
+        }
+
+        // Build cleanly formatted text email body
+        let emailBody = `New Wedding Enquiry Details:\n`;
+        emailBody += `===================================\n\n`;
+        emailBody += `Client Name: ${name}\n`;
+        emailBody += `Wedding Date: ${date}\n`;
+        emailBody += `Location: ${location}\n\n`;
+        
+        emailBody += `--- Service Breakdown ---\n`;
+        emailBody += `Bridesmaids: ${bmQty} (Service: ${bmService})\n`;
+        emailBody += `Mothers: ${momQty} (Service: ${momService})\n`;
+        emailBody += `Guests: ${guestQty} (Service: ${guestService})\n`;
+        emailBody += `Junior / Flower Girls: ${jrQty} (Service: ${jrService})\n\n`;
+        
+        emailBody += `Wants a Trial: ${trialIntent}\n\n`;
+        
+        emailBody += `--- Client Contact Details ---\n`;
+        emailBody += `Phone: ${phone}\n`;
+        emailBody += `Email: ${email}\n`;
+
+        // Construct Mailto parameters safely encoded for URLs
+        const emailTo = recipients.join(',');
+        const subject = encodeURIComponent(`Wedding Enquiry - ${name} (${date})`);
+        const body = encodeURIComponent(emailBody);
+
+        // Open device native mail application
+        window.location.href = `mailto:${emailTo}?subject=${subject}&body=${body}`;
+    }
+</script>
+
+</body>
+</html>
